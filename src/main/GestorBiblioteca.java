@@ -28,6 +28,8 @@ public class GestorBiblioteca {
 			case Menu.GESTIONAR_PRESTAMOS:
 				break;
 			
+			case Menu.SALIR:
+				break;
 				
 			default:
 				throw new IllegalArgumentException("Unexpected value: " + menu);

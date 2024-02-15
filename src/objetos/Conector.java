@@ -11,12 +11,12 @@ public class Conector {
 	private static String usuario = "root";
 	private static String password = "";
 
-	private Connection con;
+	protected static Connection con;
 	
-	public Conector() {
+	public  void conectar() {
 		
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			String url = "jdbc:mysql://localhost/biblioteca";
 			con = DriverManager.getConnection(url, "root", "");
 			

@@ -7,9 +7,12 @@ import objetos.Libro;
 
 public class GestorLibros {
 
+
 	public static void run (Scanner scan) {
-		
+
 		int opcion;
+		
+		GestorBBDD gestorbbdd = new GestorBBDD();
 		
 		do {
 			
@@ -19,19 +22,45 @@ public class GestorLibros {
 			switch (opcion) {
 			
 			case Menu.INSERTAR_LIBROS: 
-				System.out.println("Insertar socio");
+				gestorbbdd.conectar();
+				gestorbbdd.insertarLibro(FormulariosDeDatos.pedirDatosLibro(scan));
+				gestorbbdd.cerrar();
 				break;
 				
 			case Menu.ELIMINAR_LIBROS:
-				System.out.println("insertar socio");
+				int id = FormulariosDeDatos.eliminarIdLibro(scan);
+				gestorbbdd.conectar();
+				gestorbbdd.eliminarLibro(id);
+				gestorbbdd.cerrar();
 				break;
 				
 			case Menu.MODIFICAR_LIBROS:
-				System.out.println("insertar socio");
+				//pedir id
+				//mostrar info visor
+				//pedirDatos
 				break;
 				
 			case Menu.MOSTRAR_LIBROS:
-				ArrayList<Libro> libros = GestorBBDD.getLibro(id);
+				gestorbbdd.conectar();
+				Visor.verLibros( gestorbbdd.mostrarLibros());
+				gestorbbdd.cerrar();
+				break;
+				
+			case Menu.VER_LIBRO:
+				//pedir id y recoger en una variable
+				id = FormulariosDeDatos.pedirIdLibro(scan);
+				
+				//con la id conectar, conseguir el libro y recoger en variable
+				gestorbbdd.conectar();
+				Libro libro = gestorbbdd.getLibro(id);
+				gestorbbdd.cerrar();
+				
+				//visor.mostrar
+				Visor.mostrarLibro(libro);
+				break;
+				
+			case Menu.SALIR:
+				break;
 				
 			default:
 				throw new IllegalArgumentException("Unexpected value: " + opcion);
