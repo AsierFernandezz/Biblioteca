@@ -104,6 +104,11 @@ public class GestorBBDD extends Conector{
 		return libros;
 		
 	}
+	
+	public void modificarDatos() {
+		
+	}
+	
 }
 	
 
